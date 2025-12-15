@@ -1,0 +1,32 @@
+[
+    {
+        "ingredient": "Pomidor",
+        "category": "vegetable",
+        "quantity": 2
+    },
+    {
+        "ingredient": "Salata",
+        "category": "vegetable",
+        "quantity": 1
+    },
+    {
+        "ingredient": "Jajka",
+        "category": "dairy",
+        "quantity": 1
+    },
+    {
+        "ingredient": "Mleko",
+        "category": "dairy",
+        "quantity": 1
+    },
+    {
+        "ingredient": "Maka",
+        "category": "grain",
+        "quantity": 1
+    },
+    {
+        "ingredient": "ketchup",
+        "category": "condiment",
+        "quantity": 1
+    }
+]
