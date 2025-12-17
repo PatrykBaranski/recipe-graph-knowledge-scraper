@@ -56,4 +56,13 @@ class PhotoReader:
 ## Testing purpose
 test = PhotoReader()
 test2 = test.get_list_from_photo_path("shopping_list.jpeg")
-print(test2)
+
+json_str = json.dumps(test2, indent=4)
+with open("../data/fridge.json", "w") as f:
+    f.write(json_str)
+
+with open("../data/fridge.json", "r") as f:
+    data2 = json.load(f)
+
+print(data2)
+print(type(data2))
