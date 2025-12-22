@@ -36,7 +36,7 @@ def read_fridge() -> str:
     To jest zawartość lodówki w formacie json: {question}, wylistuj nazwy skłądników (klucz ingredient) i ich ilość (quantity)
     """
                                               )
-    response2 = llm.invoke(function_prompt.format(question=fridge.fridge_content))
+    response2 = llm.invoke(function_prompt.format(question=fridge.content))
     return response2.content
 
 @tool
@@ -51,7 +51,7 @@ def add_ingredient_to_fridge(ingredient_to_add: str, quantity: int):
 
     function_response = llm.invoke(conversion_prompt.format(question=f"{ingredient_to_add, quantity}"))
     data = json.loads(function_response.content.replace("`", "").replace("\n", "").replace("json", "").strip(), strict=False)
-    fridge.add_to_fridge(data)
+    fridge.add_to_content(data)
 
 @tool
 def remove_ingredient_from_fridge(ingredient_to_remove: str, quantity: int):
@@ -64,7 +64,7 @@ def remove_ingredient_from_fridge(ingredient_to_remove: str, quantity: int):
     """
     function_response = llm.invoke(conversion_prompt.format(question=f"{ingredient_to_remove, quantity}"))
     data = json.loads(function_response.content.replace("`", "").replace("\n", "").replace("json", "").strip(), strict=False)
-    fridge.remove_from_fridge(data)
+    fridge.remove_from_content(data)
 
 tools = [read_fridge, add_ingredient_to_fridge, remove_ingredient_from_fridge]
 
@@ -83,6 +83,7 @@ class FridgeChatbot:
         result = self.agent_executor.invoke({"input": message})
         return result["output"]
 
+## Przykładowe użycie
 fridge_chatbot = FridgeChatbot(agent_executor)
 response = fridge_chatbot.chat("Jakie składniki są w lodówce?")
 print(response)

@@ -9,6 +9,12 @@ from dotenv import load_dotenv
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import AzureChatOpenAI
 
+
+def load_image_from_path_as_bytes(photo_path):
+    with open(photo_path, "rb") as f:
+        return  f.read()
+
+
 class PhotoReader:
 
     try:
@@ -36,15 +42,11 @@ class PhotoReader:
 
                                               Oto Twoja lista zakupów: {question}""")
 
-    def load_image_from_path_as_bytes(self, photo_path):
-        with open(photo_path, "rb") as f:
-            return  f.read()
-
     def get_list_from_photo_path(self, photo_path):
         llm = AzureChatOpenAI(model="gpt-5-nano")
 
         result = self.client.analyze(
-            image_data=self.load_image_from_path_as_bytes(photo_path),
+            image_data=load_image_from_path_as_bytes(photo_path),
             visual_features=[VisualFeatures.READ],
         )
 
