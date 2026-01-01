@@ -1,32 +1,27 @@
 [
     {
-        "ingredient": "Pomidor",
-        "category": "vegetable",
-        "quantity": 2
+        "ingredient": "jajka",
+        "quantity": 6,
+        "category": "Inne"
     },
     {
-        "ingredient": "Salata",
-        "category": "vegetable",
-        "quantity": 1
+        "ingredient": "mas\u0142o",
+        "quantity": 1,
+        "category": "Inne"
     },
     {
-        "ingredient": "Jajka",
-        "category": "dairy",
-        "quantity": 1
+        "ingredient": "jab\u0142ka",
+        "quantity": 1,
+        "category": "Inne"
     },
     {
-        "ingredient": "Mleko",
-        "category": "dairy",
-        "quantity": 1
+        "ingredient": "kielbasa",
+        "quantity": 1,
+        "category": "Inne"
     },
     {
-        "ingredient": "Maka",
-        "category": "grain",
-        "quantity": 1
-    },
-    {
-        "ingredient": "ketchup",
-        "category": "condiment",
-        "quantity": 1
+        "ingredient": "pomidory ",
+        "quantity": 1,
+        "category": "Inne"
     }
 ]

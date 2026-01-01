@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 class RecipeDataPipeline:
     def __init__(self):
 
-        self.driver = GraphDatabase.driver("bolt://localhost:7687", auth=("neo4j", "DATABASE_PASSWORD"))
+        self.driver = GraphDatabase.driver("bolt://localhost:7687", auth=("neo4j", "Patbar@246"))
 
     def close_spider(self, spider):
         self.driver.close()
