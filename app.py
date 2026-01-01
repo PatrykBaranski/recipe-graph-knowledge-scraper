@@ -89,6 +89,11 @@ def render_chatbot():
                         st.error(f"Wystąpił błąd podczas komunikacji z chatbotem: {e}")
 
     with col2:
+        if st.button("Wyczyść historię"):
+            st.session_state.messages = []
+            st.session_state.chatbot.clear_history()
+            st.rerun()
+
         st.subheader("Lodówka")
         fridge_content = st.session_state.fridge.load_content()
         if not fridge_content:
