@@ -1,1 +1,42 @@
-[]
+[
+    {
+        "ingredient": "mas\u0142o do usma\u017cenia \u015bliwek",
+        "quantity": 2,
+        "category": "Brakuj\u0105ce do: Nale\u015bnik pieczony ze \u015bliwkami"
+    },
+    {
+        "ingredient": "m\u0105ka pszenna tortowa",
+        "quantity": 2,
+        "category": "Brakuj\u0105ce do: Nale\u015bnik pieczony ze \u015bliwkami"
+    },
+    {
+        "ingredient": "cynamon",
+        "quantity": 2,
+        "category": "Brakuj\u0105ce do: Nale\u015bnik pieczony ze \u015bliwkami"
+    },
+    {
+        "ingredient": "\u015bliwki",
+        "quantity": 2,
+        "category": "Brakuj\u0105ce do: Nale\u015bnik pieczony ze \u015bliwkami"
+    },
+    {
+        "ingredient": "cukier wanilinowy",
+        "quantity": 2,
+        "category": "Brakuj\u0105ce do: Nale\u015bnik pieczony ze \u015bliwkami"
+    },
+    {
+        "ingredient": "bardzo du\u017ce jajka",
+        "quantity": 2,
+        "category": "Brakuj\u0105ce do: Nale\u015bnik pieczony ze \u015bliwkami"
+    },
+    {
+        "ingredient": "serek waniliowy typu Danio",
+        "quantity": 2,
+        "category": "Brakuj\u0105ce do: Nale\u015bnik pieczony ze \u015bliwkami"
+    },
+    {
+        "ingredient": "mas\u0142o - do posmarowania blachy",
+        "quantity": 2,
+        "category": "Brakuj\u0105ce do: Nale\u015bnik pieczony ze \u015bliwkami"
+    }
+]
