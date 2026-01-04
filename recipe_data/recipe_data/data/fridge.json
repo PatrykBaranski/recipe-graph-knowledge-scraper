@@ -1,32 +1,26 @@
 [
     {
-        "ingredient": "Pomidor",
-        "category": "vegetable",
-        "quantity": 2
+        "ingredient": "mleko",
+        "quantity": 200,
+        "unit": "ml",
+        "category": "Inne"
     },
     {
-        "ingredient": "Salata",
-        "category": "vegetable",
-        "quantity": 1
+        "ingredient": "jajko",
+        "quantity": 6,
+        "unit": "szt",
+        "category": "Inne"
     },
     {
-        "ingredient": "Jajka",
-        "category": "dairy",
-        "quantity": 1
+        "ingredient": "banan",
+        "quantity": 2,
+        "unit": "szt",
+        "category": "Inne"
     },
     {
-        "ingredient": "Mleko",
-        "category": "dairy",
-        "quantity": 1
-    },
-    {
-        "ingredient": "Maka",
-        "category": "grain",
-        "quantity": 1
-    },
-    {
-        "ingredient": "ketchup",
-        "category": "condiment",
-        "quantity": 1
+        "ingredient": "pomidor",
+        "quantity": 1,
+        "unit": "szt",
+        "category": "Inne"
     }
 ]

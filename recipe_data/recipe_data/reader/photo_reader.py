@@ -38,7 +38,8 @@ class PhotoReader:
                                               jeżeli nie ma przy składniku liczby sugerującej ilość, to domyślnie ustaw 1 
                                               i zwrócenie ich w formacie json. 
                                               Nie dodawaj żadnego dodatkowego tekstu w odpowiedzi, sam czysty json, żeby móc go sformatować. 
-                                              Dodatkowo do kluczy w odpowiedzi json użyj angielskich nazw: ingredient, category, quantity,
+                                              Dodatkowo do kluczy w odpowiedzi json użyj angielskich nazw: ingredient, category, quantity, unit.
+                                              Quantity powinno być liczbą (integer lub float). Unit powinno być jednostką (np. kg, g, l, szt, opakowanie). Jeśli brak jednostki, użyj "szt".
 
                                               Oto Twoja lista zakupów: {question}""")
 
@@ -55,16 +56,17 @@ class PhotoReader:
         return data
 
 
-## Testing purpose
-test = PhotoReader()
-test2 = test.get_list_from_photo_path("shopping_list.jpeg")
+if __name__ == "__main__":
+    ## Testing purpose
+    test = PhotoReader()
+    test2 = test.get_list_from_photo_path("shopping_list.jpeg")
 
-json_str = json.dumps(test2, indent=4)
-with open("../data/fridge.json", "w") as f:
-    f.write(json_str)
+    json_str = json.dumps(test2, indent=4)
+    with open("../data/fridge.json", "w") as f:
+        f.write(json_str)
 
-with open("../data/fridge.json", "r") as f:
-    data2 = json.load(f)
+    with open("../data/fridge.json", "r") as f:
+        data2 = json.load(f)
 
-print(data2)
-print(type(data2))
+    print(data2)
+    print(type(data2))
