@@ -1,1 +1,47 @@
-[]
+[
+    {
+        "ingredient": "s\u00f3l",
+        "category": "przyprawy",
+        "quantity": 1
+    },
+    {
+        "ingredient": "pieprz",
+        "category": "spice",
+        "quantity": 1
+    },
+    {
+        "ingredient": "bor\u00f3wki lub jagody le\u015bne",
+        "quantity": 1,
+        "category": "Brakuj\u0105ce do: Skyrnik czekoladowy"
+    },
+    {
+        "ingredient": "Skyr naturalny - nie pitny",
+        "quantity": 1,
+        "category": "Brakuj\u0105ce do: Skyrnik czekoladowy"
+    },
+    {
+        "ingredient": "maliny lub je\u017cyny",
+        "quantity": 1,
+        "category": "Brakuj\u0105ce do: Skyrnik czekoladowy"
+    },
+    {
+        "ingredient": "kakao",
+        "quantity": 1,
+        "category": "Brakuj\u0105ce do: Skyrnik czekoladowy"
+    },
+    {
+        "ingredient": "ewentualna dekoracja:polewa czekoladowaz mas\u0142a",
+        "quantity": 1,
+        "category": "Brakuj\u0105ce do: Skyrnik czekoladowy"
+    },
+    {
+        "ingredient": "erytrol lub zwyk\u0142y cukier",
+        "quantity": 1,
+        "category": "Brakuj\u0105ce do: Skyrnik czekoladowy"
+    },
+    {
+        "ingredient": "budy\u0144 waniliowy bez cukru",
+        "quantity": 1,
+        "category": "Brakuj\u0105ce do: Skyrnik czekoladowy"
+    }
+]

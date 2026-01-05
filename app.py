@@ -11,7 +11,7 @@ try:
     from recipe_data.recipe_data.tools.chatbot_with_tools import FridgeChatbot
     from recipe_data.recipe_data.reader.photo_reader import PhotoReader
 except ImportError as e:
-    st.error(f"Something went wrong with importing data")
+    st.error(f"Something went wrong with importing data {e}")
     st.stop()
 
 

@@ -2,7 +2,6 @@ import json
 import os
 
 from dotenv import load_dotenv
-from langchain_classic import hub
 from langchain_classic.agents import create_tool_calling_agent, AgentExecutor
 from langchain_core.prompts import ChatPromptTemplate, PromptTemplate
 from langchain_core.messages import HumanMessage, AIMessage
