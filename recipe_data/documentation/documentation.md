@@ -1,97 +1,3 @@
-**Wzór**
-
-<strong>Proponowana struktura dokumentacji końcowej projektu</strong>
-
-1. Wprowadzenie
-
-  Krótki opis problemu biznesowego (np. skalowalne dopasowanie talentów do projektów).
-
-  Wizja systemu Talent Match AI.
-
-  Krótkie podsumowanie zastosowanych technologii (Neo4j, LangChain, MCP, LangSmith).
-
-2. Opis architektury systemu
-
-  Schemat architektury (graf przepływu danych i komponentów).
-
-   Źródła danych.
-
-  Opis poszczególnych modułów:
-
-    Ingestion (CV PDF -> knowledge graph)
-
-    RFP Parsing & Availability
-
-    Matching Engine
-
-    Conversation Agent (schmat grafu, jeśli został zaprojektowany, lista i opis tooli)
-
-    Frontend Layer
-
-3. Knowledge Graph
-
-  Schemat grafu (encje i relacje).
-
-  Jak przetwarzano dane wejściowe: CV, RFP, pliki YAML/JSON.
-
-  Metody walidacji danych i zapewnienia jakości ekstrakcji.
-
-4. Algorytm dopasowania danych z różnych źródeł (Matching Algorithm)
-
-  Jak działa algorytm dopasowania – krok po kroku.
-
-  Jak uwzględnia różne czynniki: skills match, doświadczenie, dostępność.
-
-  Wyjaśnienie sposobu punktacji / rankingowania kandydatów.
-
-  Na przykład: łączenie po podobieństwie embeddingów, LLM-as-a-Judge, Advanced RAG + scoring, HybridRAG, własna metryka do scoringu, itp.
-
-5. Business Intelligence / Zaawansowane zapytania
-
-  Lista obsługiwanych typów zapytań, np.: Liczenie Filtrowanie Agregacja Reasoning / multi-hop Zapytania czasowe Złożone scenariusze biznesowe (co-jeśli, optymalizacja zespołu)
-
-  Przykłady zapytań i odpowiedzi systemu.
-
-6. Wyniki eksperymentów / metryki
-
-  Dokładność dopasowania (matching accuracy)
-
-  Czas odpowiedzi na zapytania.
-
-  Efektywność grafu (średni czas przeszukiwania Cypher).
-
-  Porównanie GraphRAG vs. tradycyjny RAG:
-
-    Porównanie wydajności
-
-    Dokładność odpowiedzi na złożone zapytania
-
-    Czas odpowiedzi
-
-    Wybrane metryki
-
-7. Wnioski i rekomendacje
-
-  Co działało najlepiej w systemie GraphRAG?
-
-  Gdzie tradycyjny RAG był niewystarczający?
-
-  Ewentualne ograniczenia i kierunki rozwoju (dynamiczne RFP, real-time updates)?
-
-  Czego nie udało się zrobić?
-
-  Jakie system ma ograniczenia?
-
-
-8. Załączniki / dokumentacja techniczna
-
-  Link do repozytorium (jeśli jest publiczne)
-
-  Instrukcje uruchomienia systemu (Docker, Neo4j, środowisko Python).
- 
-
-<strong>Dokumentacja projektu na TEG - zaoczne 2025</strong>
-
 1. Wprowadzenie
 <br><strong>Problem biznesowy</strong>: Agent asystujący przy planowaniu posiłków. 
 Ma wyszukiwać przepisy na podstawie tego co użytknownik ma w lodówce, 
@@ -118,8 +24,9 @@ za pomocą **scrapera**`AniaGotujeSpider`(startując z url:
 i dodawane w ustrukturyzowanej formie za pomocą `RecipeDataPipeline`.
 <br>**Agent**: Za zarządzanie systemem i przetwarzanie zapytań użytkownika 
 odpowiada **Agent(`FridgeChatbot`)**, znajdujący się 
-w pliku **chatbot_with_tools.py**. najdują się tam wszystkie prompty, 
-konfiguracje **RAG** i **Graph RAG**, oraz **toole**.
+w pliku **chatbot_with_tools.py**. Prompty znajdują się w pliku 
+**fridge_tools.py** i **shopping_list_tools**. 
+Konfiguracje **RAG** i **Graph RAG** znajdują się w **rag_tools.py**.
 <br>**Front**: Front został wykonany w **streamlit** i 
 znajduje się w pliku **app.py**. Jest prosty i czytelny, na samym początku użytkownika
 wida pole tekstowe zachęcające do rozpoczęcia integracji z asystentem, po prawej stronie
@@ -139,6 +46,8 @@ listy zakupów
 zakupów produkty potrzebne do wykonania przepisu, których
 nie ma w lodówce. Używany, gdy użytkownik wyraźnie o to 
 poprosi
+- `create_shopping_list_file_for_recipe` -> Zwraca listę brakujacych składników,
+gdy użytkownik nie chce dodawać tych składników do listy
 3. Knowledge Graph
 <br>**Przykładowy fragment grafu**:![sample](sample_graph.png)
 Każdy **przepis** ma relację: *CONTAINS* 
@@ -149,6 +58,11 @@ Pozwala to na dokładne wyszukiwanie przepisów w zależnosći
 od preferencji użytkownika i od składników, które ma,
 bądź chce użyć.
 4. Zaawansowane zapytania
+<br>**Przykładowa konwersacja z chatbotem**:
+![sample_chat](sample1.png)
+![sample_chat](sample2.png)
+![sample_chat](sample3.png)
+![sample_chat](sample4.png)
 5. Metryki
 6. Wnioski i rekomendacje
 7. Załączniki
