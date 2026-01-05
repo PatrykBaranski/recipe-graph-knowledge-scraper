@@ -3,6 +3,8 @@ import os
 import tempfile
 from dotenv import load_dotenv
 
+st.set_page_config(page_title="Asystent kulinarny", layout="wide")
+
 load_dotenv()
 
 try:
@@ -28,10 +30,7 @@ if 'photo_reader' not in st.session_state:
     st.session_state.photo_reader = PhotoReader()
 
 def main():
-    st.set_page_config(page_title="Inteligentna Lodówka", layout="wide")
-    
-    st.sidebar.title("Nawigacja")
-    page = st.sidebar.radio("Wybierz widok", ["Chatbot", "Lodówka", "Lista Zakupów"])
+    page = st.sidebar.radio("", ["Chatbot", "Lodówka", "Lista Zakupów"])
 
     st.sidebar.divider()
     st.sidebar.title("Ustawienia Chatbota")
@@ -64,29 +63,6 @@ def render_chatbot():
     st.title("Asystent Kulinarny")
     
     col1, col2 = st.columns([3, 1])
-    
-    with col1:
-        if "messages" not in st.session_state:
-            st.session_state.messages = []
-
-        for message in st.session_state.messages:
-            with st.chat_message(message["role"]):
-                st.markdown(message["content"])
-
-        if prompt := st.chat_input("W czym mogę pomóc?"):
-            st.session_state.messages.append({"role": "user", "content": prompt})
-            with st.chat_message("user"):
-                st.markdown(prompt)
-
-            with st.chat_message("assistant"):
-                with st.spinner("Myślę..."):
-                    try:
-                        response = st.session_state.chatbot.chat(prompt)
-                        st.markdown(response)
-                        st.session_state.messages.append({"role": "assistant", "content": response})
-                        st.rerun()
-                    except Exception as e:
-                        st.error(f"Wystąpił błąd podczas komunikacji z chatbotem: {e}")
 
     with col2:
         if st.button("Wyczyść historię"):
@@ -100,7 +76,8 @@ def render_chatbot():
             st.info("Pusta")
         else:
             for item in fridge_content:
-                st.text(f"- {item.get('ingredient', 'Unknown')}: {item.get('quantity', '')}")
+                unit = item.get('unit', '')
+                st.text(f"- {item.get('ingredient', 'Unknown')}: {item.get('quantity', '')} {unit}")
         
         st.divider()
         
@@ -110,7 +87,31 @@ def render_chatbot():
             st.info("Pusta")
         else:
             for item in shopping_list_content:
-                st.text(f"- {item.get('ingredient', 'Unknown')}: {item.get('quantity', '')}")
+                unit = item.get('unit', '')
+                st.text(f"- {item.get('ingredient', 'Unknown')}: {item.get('quantity', '')} {unit}")
+    
+    with col1:
+        if "messages" not in st.session_state:
+            st.session_state.messages = []
+
+        for message in st.session_state.messages:
+            with st.chat_message(message["role"]):
+                st.markdown(message["content"])
+
+        if st.session_state.messages and st.session_state.messages[-1]["role"] == "user":
+            with st.chat_message("assistant"):
+                with st.spinner("Myślę..."):
+                    try:
+                        response = st.session_state.chatbot.chat(st.session_state.messages[-1]["content"])
+                        print(response)
+                        st.markdown(response)
+                        st.session_state.messages.append({"role": "assistant", "content": response})
+                    except Exception as e:
+                        st.error(f"Wystąpił błąd podczas komunikacji z chatbotem: {e}")
+
+        if prompt := st.chat_input("W czym mogę pomóc?"):
+            st.session_state.messages.append({"role": "user", "content": prompt})
+            st.rerun()
 
 def render_list_view(title, list_obj):
     st.title(title)
@@ -127,6 +128,7 @@ def render_list_view(title, list_obj):
             for i, item in enumerate(list_obj.content):
                 name = item.get('ingredient', 'Nieznany')
                 quantity = item.get('quantity', '')
+                unit = item.get('unit', '')
                 category = item.get('category', '')
                 
                 with st.container(border=True):
@@ -134,7 +136,7 @@ def render_list_view(title, list_obj):
                     c1.write(f"**{name}**")
                     if category:
                         c1.caption(f"Kategoria: {category}")
-                    c2.write(f"Ilość: {quantity}")
+                    c2.write(f"Ilość: {quantity} {unit}")
                     if c3.button("Usuń", key=f"remove_{title}_{i}_{name}"):
                         list_obj.remove_from_content(item)
                         st.rerun()
@@ -144,7 +146,11 @@ def render_list_view(title, list_obj):
         
         with st.form(f"add_form_{title}"):
             new_item_name = st.text_input("Nazwa produktu")
-            new_item_qty = st.number_input("Ilość", min_value=1, value=1)
+            c_qty, c_unit = st.columns([1, 1])
+            with c_qty:
+                new_item_qty = st.number_input("Ilość", min_value=1, value=1)
+            with c_unit:
+                new_item_unit = st.selectbox("Jednostka", ["szt", "kg", "g", "l", "ml", "opak."], index=0)
             new_item_cat = st.text_input("Kategoria (opcjonalnie)")
             
             submitted = st.form_submit_button("Dodaj")
@@ -152,6 +158,7 @@ def render_list_view(title, list_obj):
                 item_to_add = {
                     "ingredient": new_item_name,
                     "quantity": new_item_qty,
+                    "unit": new_item_unit,
                     "category": new_item_cat if new_item_cat else "Inne"
                 }
                 list_obj.add_to_content(item_to_add)

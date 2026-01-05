@@ -23,7 +23,7 @@ class ListBlueprint:
     def add_to_content(self, ingredient_to_add):
         found = False
         for ingredient in self.content:
-            if ingredient["ingredient"] == ingredient_to_add["ingredient"]:
+            if ingredient["ingredient"] == ingredient_to_add["ingredient"] and ingredient.get("unit") == ingredient_to_add.get("unit"):
                 ingredient["quantity"] += ingredient_to_add["quantity"]
                 found = True
                 break
@@ -34,9 +34,9 @@ class ListBlueprint:
     def remove_from_content(self, thing_to_remove):
         found = False
         for ingredient in self.content:
-            if ingredient["ingredient"] == thing_to_remove["ingredient"]:
+            if ingredient["ingredient"] == thing_to_remove["ingredient"] and ingredient.get("unit") == thing_to_remove.get("unit"):
                 if ingredient["quantity"] <= thing_to_remove["quantity"]:
-                    self.content.remove(thing_to_remove)
+                    self.content.remove(ingredient)
                 else:
                     ingredient["quantity"] -= thing_to_remove["quantity"]
                 found = True

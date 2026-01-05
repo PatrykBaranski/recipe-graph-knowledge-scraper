@@ -1,47 +1,42 @@
 [
     {
-        "ingredient": "s\u00f3l",
-        "category": "przyprawy",
-        "quantity": 1
+        "ingredient": "mas\u0142o do usma\u017cenia \u015bliwek",
+        "quantity": 2,
+        "category": "Brakuj\u0105ce do: Nale\u015bnik pieczony ze \u015bliwkami"
     },
     {
-        "ingredient": "pieprz",
-        "category": "spice",
-        "quantity": 1
+        "ingredient": "m\u0105ka pszenna tortowa",
+        "quantity": 2,
+        "category": "Brakuj\u0105ce do: Nale\u015bnik pieczony ze \u015bliwkami"
     },
     {
-        "ingredient": "bor\u00f3wki lub jagody le\u015bne",
-        "quantity": 1,
-        "category": "Brakuj\u0105ce do: Skyrnik czekoladowy"
+        "ingredient": "cynamon",
+        "quantity": 2,
+        "category": "Brakuj\u0105ce do: Nale\u015bnik pieczony ze \u015bliwkami"
     },
     {
-        "ingredient": "Skyr naturalny - nie pitny",
-        "quantity": 1,
-        "category": "Brakuj\u0105ce do: Skyrnik czekoladowy"
+        "ingredient": "\u015bliwki",
+        "quantity": 2,
+        "category": "Brakuj\u0105ce do: Nale\u015bnik pieczony ze \u015bliwkami"
     },
     {
-        "ingredient": "maliny lub je\u017cyny",
-        "quantity": 1,
-        "category": "Brakuj\u0105ce do: Skyrnik czekoladowy"
+        "ingredient": "cukier wanilinowy",
+        "quantity": 2,
+        "category": "Brakuj\u0105ce do: Nale\u015bnik pieczony ze \u015bliwkami"
     },
     {
-        "ingredient": "kakao",
-        "quantity": 1,
-        "category": "Brakuj\u0105ce do: Skyrnik czekoladowy"
+        "ingredient": "bardzo du\u017ce jajka",
+        "quantity": 2,
+        "category": "Brakuj\u0105ce do: Nale\u015bnik pieczony ze \u015bliwkami"
     },
     {
-        "ingredient": "ewentualna dekoracja:polewa czekoladowaz mas\u0142a",
-        "quantity": 1,
-        "category": "Brakuj\u0105ce do: Skyrnik czekoladowy"
+        "ingredient": "serek waniliowy typu Danio",
+        "quantity": 2,
+        "category": "Brakuj\u0105ce do: Nale\u015bnik pieczony ze \u015bliwkami"
     },
     {
-        "ingredient": "erytrol lub zwyk\u0142y cukier",
-        "quantity": 1,
-        "category": "Brakuj\u0105ce do: Skyrnik czekoladowy"
-    },
-    {
-        "ingredient": "budy\u0144 waniliowy bez cukru",
-        "quantity": 1,
-        "category": "Brakuj\u0105ce do: Skyrnik czekoladowy"
+        "ingredient": "mas\u0142o - do posmarowania blachy",
+        "quantity": 2,
+        "category": "Brakuj\u0105ce do: Nale\u015bnik pieczony ze \u015bliwkami"
     }
 ]

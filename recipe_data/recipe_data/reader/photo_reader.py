@@ -37,7 +37,8 @@ class PhotoReader:
                                               jeżeli nie ma przy składniku liczby sugerującej ilość, to domyślnie ustaw 1 
                                               i zwrócenie ich w formacie json. 
                                               Nie dodawaj żadnego dodatkowego tekstu w odpowiedzi, sam czysty json, żeby móc go sformatować. 
-                                              Dodatkowo do kluczy w odpowiedzi json użyj angielskich nazw: ingredient, category, quantity,
+                                              Dodatkowo do kluczy w odpowiedzi json użyj angielskich nazw: ingredient, category, quantity, unit.
+                                              Quantity powinno być liczbą (integer lub float). Unit powinno być jednostką (np. kg, g, l, szt, opakowanie). Jeśli brak jednostki, użyj "szt".
 
                                               Oto Twoja lista zakupów: {question}""")
 

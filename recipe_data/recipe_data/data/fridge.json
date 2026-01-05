@@ -1,22 +1,26 @@
 [
     {
-        "ingredient": "jajka",
+        "ingredient": "mleko",
+        "quantity": 200,
+        "unit": "ml",
+        "category": "Inne"
+    },
+    {
+        "ingredient": "jajko",
         "quantity": 6,
+        "unit": "szt",
         "category": "Inne"
     },
     {
-        "ingredient": "jab\u0142ko ",
-        "quantity": 1,
+        "ingredient": "banan",
+        "quantity": 2,
+        "unit": "szt",
         "category": "Inne"
     },
     {
-        "ingredient": "serek wiejski",
+        "ingredient": "pomidor",
         "quantity": 1,
-        "category": "Inne"
-    },
-    {
-        "ingredient": "ser",
-        "quantity": 1,
+        "unit": "szt",
         "category": "Inne"
     }
 ]
