@@ -64,8 +64,19 @@ bądź chce użyć.
 ![sample_chat](sample3.png)
 ![sample_chat](sample4.png)
 5. Metryki
+<br>
+
+| Pytanie                  | 	Odpowiedź RAG                                                                                                                                                         | Odpowiedź Graph RAG	                                                                                                                                                                                                   | Czas RAG | Czas Graph RAG |
+|:-------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| :---------| :-----|
+| Ile jajek mam w lodówce? | Masz 6 jajek w lodówce.                                                                                                                                                | Masz 6 jajek w lodówce.                                                                                                                                                                                                | 00:01,55 | 00:03,08 |
+| Co mogę zrobić na śniadanie z jajek? | "Podał 4 proste przepisy (Jajecznicza, omlet, jajka sadzone, Frittata) i zapytał: Chcesz dodać brakujące składniki do listy  zakupów, czy potrzebujesz pliku z listą?" | "Przedstawił 10 propozycji przepisów z linkami i komunikat: Jeżeli któryś przepis Cię interesuje, chętnie pomogę w dodaniu brakujących składników do listy zakupów lub przygotuję plik z listą składników! Co wolisz?" | 00:12,25 | 00:16,62 |
+
+O ile zwykły RAG działa ciutkę szybicej, to GraphRag nadrabia różnorodnością, podając linki do przepisów,
+a nie tylko ich skróconą formę, oraz podaje ich znacznie więcej.
 6. Wnioski i rekomendacje
 7. Załączniki
+<br>**Miejsce przechowywania projektu:**
+[Repozytorium na GitHub](https://github.com/PatrykBaranski/recipe-graph-knowledge-scraper)
 <br>**Konfiguracja:**
 <br>
    1. Wszystkie potrzebne paczki znajdują się w pliku: **requirements.txt**, 
