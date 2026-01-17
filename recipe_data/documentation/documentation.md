@@ -3,7 +3,7 @@
 Ma wyszukiwać przepisy na podstawie tego co użytknownik ma w lodówce, 
 tworzyć listy zakupów na podstawie przepisów, które użytkownik chce wykonać.
 <br><strong>Użyte technolgie</strong>: Neo4j, 
-Langchain, Tavily, Azure Cognitive Services
+Langchain, Tavily, Azure Cognitive Services, Azure Embedding.
 2. Opis modułów
 <br>**Przechowywanie danych**:
 Dane *lodówki* i *listy zakupów* przechowywane są lokalnie w 
@@ -65,14 +65,14 @@ bądź chce użyć.
 ![sample_chat](sample4.png)
 5. Metryki
 <br>
-
-| Pytanie                  | 	Odpowiedź RAG                                                                                                                                                         | Odpowiedź Graph RAG	                                                                                                                                                                                                   | Czas RAG | Czas Graph RAG |
-|:-------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| :---------| :-----|
-| Ile jajek mam w lodówce? | Masz 6 jajek w lodówce.                                                                                                                                                | Masz 6 jajek w lodówce.                                                                                                                                                                                                | 00:01,55 | 00:03,08 |
-| Co mogę zrobić na śniadanie z jajek? | "Podał 4 proste przepisy (Jajecznicza, omlet, jajka sadzone, Frittata) i zapytał: Chcesz dodać brakujące składniki do listy  zakupów, czy potrzebujesz pliku z listą?" | "Przedstawił 10 propozycji przepisów z linkami i komunikat: Jeżeli któryś przepis Cię interesuje, chętnie pomogę w dodaniu brakujących składników do listy zakupów lub przygotuję plik z listą składników! Co wolisz?" | 00:12,25 | 00:16,62 |
-
-O ile zwykły RAG działa ciutkę szybicej, to GraphRag nadrabia różnorodnością, podając linki do przepisów,
-a nie tylko ich skróconą formę, oraz podaje ich znacznie więcej.
+Pomiary znajdują się w osobnym pliku pdf.
+<br>**Wnioski:**
+<br> GraphRag trwa prawie dwukrotnie dłużej, ale częściej proponuje dodanie 
+brakujących składników do listy zakupów, oraz nawet gdy twierdził, że 
+nie wie co mam w lodówce, to proponował przepis uwzględniający zawartość
+lodówki. RAG za to działał szybciej, brzmiał przekonująco, ale gdy popełniał
+błędy, to bardzo dziwaczne jak pomylenie produktu z daniem. Takich błędów
+nie popełniał GraphRag
 6. Wnioski i rekomendacje
 7. Załączniki
 <br>**Miejsce przechowywania projektu:**
@@ -102,6 +102,11 @@ OPENAI_API_VERSION="2025-01-01-preview"
 TAVILY_API_KEY=""
 COGNITIVE_API="https://fridgepoc.cognitiveservices.azure.com/"
 COGNITIVE_KEY=""
-NEO4J_PASSWORD=""` (*klucze i hasło do **neo4j** należy wypełnić swoimi danymi*)
+NEO4J_PASSWORD=""
+AZURE_EMBEDDING_API_KEY=""
+AZURE_EMBEDDING_API_VERSIONS
+AZURE_EMBEDDING_ENDPOINT
+AZURE_EMBEDDING_MODEL` (*klucze i hasło do **neo4j** należy wypełnić swoimi danymi*)
+
    5. Urchomić scraper komendą: `scrapy crawl aniagotuje_spider`
    6. Uruchomić aplikację komendą: `streamlit run app.py `
