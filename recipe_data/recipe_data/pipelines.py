@@ -1,10 +1,13 @@
+import os
+
+from dotenv import load_dotenv
 from neo4j import GraphDatabase
 from bs4 import BeautifulSoup
 
 class RecipeDataPipeline:
     def __init__(self):
-
-        self.driver = GraphDatabase.driver("bolt://localhost:7687", auth=("neo4j", ""))
+        load_dotenv(override=True)
+        self.driver = GraphDatabase.driver("bolt://localhost:7687", auth=("neo4j", os.getenv("NEO4J_PASSWORD")))
 
     def close_spider(self, spider):
         self.driver.close()
