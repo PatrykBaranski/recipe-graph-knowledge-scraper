@@ -5,18 +5,32 @@ from recipe_data.recipe_data.tools.prompts import conversion_prompt
 from recipe_data.recipe_data.tools.rag_tools import get_neo4j_graph
 
 @tool
+def read_shopping_list() -> str:
+    """
+    Zwraca listę produktów z LISTY ZAKUPÓW - czyli rzeczy które użytkownik MUSI KUPIĆ.
+    Użyj tego narzędzia TYLKO gdy użytkownik pyta o listę zakupów, co musi kupić, co jest na liście.
+    NIE używaj tego do lodówki - do tego służy read_fridge.
+
+    Returns:
+        JSON z listą produktów do kupienia.
+    """
+    return json.dumps(shopping_list.content, ensure_ascii=False)
+
+@tool
 def add_ingredient_to_shopping_list(ingredient_to_add: str, quantity: int):
     """
-    Dodaje nowy składnik do listy zakupów.
+    Dodaje nowy składnik do LISTY ZAKUPÓW - czyli do listy rzeczy, które użytkownik MUSI KUPIĆ.
+    Użyj tego narzędzia gdy użytkownik chce dodać coś do zakupów, potrzebuje kupić produkt.
+    NIE używaj tego do lodówki (produkty które już ma) - do tego służy add_ingredient_to_fridge.
     
     Args:
-        ingredient_to_add: nazwa składnika, który ma zostać dodany.
-        quantity: ilość składnika do dodania, jeżeli jest pusta, to ustaw tę wartość na jeden
+        ingredient_to_add: nazwa składnika do dodania na listę zakupów.
+        quantity: ilość do kupienia (domyślnie 1 jeśli nie podano).
     """
     function_response = llm.invoke(conversion_prompt.format(question=f"{ingredient_to_add, quantity}"))
     data = json.loads(function_response.content.replace("`", "").replace("\n", "").replace("json", "").strip(), strict=False)
     shopping_list.add_to_content(data)
-    return "Added to shopping list"
+    return "Dodano do listy zakupów"
 
 @tool
 def add_missing_ingredients_for_recipe(recipe_title: str):

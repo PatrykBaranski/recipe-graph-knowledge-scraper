@@ -1,6 +1,8 @@
 import streamlit as st
 import os
 import tempfile
+import glob
+import re
 from dotenv import load_dotenv
 
 st.set_page_config(page_title="Asystent kulinarny", layout="wide")
@@ -16,21 +18,22 @@ except ImportError as e:
     st.error(f"Something went wrong with importing data")
     st.stop()
 
+# Inicjalizacja session_state tylko raz
+def init_session_state():
+    if 'initialized' not in st.session_state:
+        st.session_state.initialized = True
+        st.session_state.fridge = Fridge()
+        st.session_state.shopping_list = ShoppingList()
+        st.session_state.chatbot = FridgeChatbot()
+        st.session_state.photo_reader = PhotoReader()
+        st.session_state.messages = []
+        st.session_state.neo4j_settings = {'use_neo4j': False, 'rag_type': 'Graph RAG'}
+        st.session_state.processing = False
 
-if 'fridge' not in st.session_state:
-    st.session_state.fridge = Fridge()
-
-if 'shopping_list' not in st.session_state:
-    st.session_state.shopping_list = ShoppingList()
-
-if 'chatbot' not in st.session_state:
-    st.session_state.chatbot = FridgeChatbot()
-
-if 'photo_reader' not in st.session_state:
-    st.session_state.photo_reader = PhotoReader()
+init_session_state()
 
 def main():
-    page = st.sidebar.radio("", ["Chatbot", "Lodówka", "Lista Zakupów"])
+    page = st.sidebar.radio("Nawigacja", ["Chatbot", "Lodówka", "Lista Zakupów"], label_visibility="collapsed")
 
     st.sidebar.divider()
     st.sidebar.title("Ustawienia Chatbota")
@@ -38,9 +41,6 @@ def main():
     rag_type = "Graph RAG"
     if use_neo4j:
         rag_type = st.sidebar.radio("Typ RAG", ["Graph RAG", "RAG"])
-
-    if 'neo4j_settings' not in st.session_state:
-        st.session_state.neo4j_settings = {'use_neo4j': False, 'rag_type': 'Graph RAG'}
     
     if st.session_state.neo4j_settings['use_neo4j'] != use_neo4j or \
        st.session_state.neo4j_settings['rag_type'] != rag_type:
@@ -91,26 +91,42 @@ def render_chatbot():
                 st.text(f"- {item.get('ingredient', 'Unknown')}: {item.get('quantity', '')} {unit}")
     
     with col1:
-        if "messages" not in st.session_state:
-            st.session_state.messages = []
-
         for message in st.session_state.messages:
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
-
-        if st.session_state.messages and st.session_state.messages[-1]["role"] == "user":
+                if message["role"] == "assistant":
+                    match = re.search(r'lista_zakupow_[^\s]+\.txt', message["content"])
+                    if match:
+                        filename = match.group(0)
+                        if os.path.exists(filename):
+                            with open(filename, "r", encoding="utf-8") as f:
+                                file_content = f.read()
+                            st.download_button(
+                                label=f"Pobierz {filename}",
+                                data=file_content,
+                                file_name=filename,
+                                mime="text/plain",
+                                key=f"download_{filename}_{st.session_state.messages.index(message)}"
+                            )
+        
+        if st.session_state.processing:
             with st.chat_message("assistant"):
                 with st.spinner("Myślę..."):
                     try:
                         response = st.session_state.chatbot.chat(st.session_state.messages[-1]["content"])
-                        print(response)
                         st.markdown(response)
                         st.session_state.messages.append({"role": "assistant", "content": response})
                     except Exception as e:
-                        st.error(f"Wystąpił błąd podczas komunikacji z chatbotem: {e}")
+                        error_msg = f"Wystąpił błąd podczas komunikacji z chatbotem: {e}"
+                        st.error(error_msg)
+                        st.session_state.messages.append({"role": "assistant", "content": error_msg})
+                    finally:
+                        st.session_state.processing = False
+                        st.rerun()
 
         if prompt := st.chat_input("W czym mogę pomóc?"):
             st.session_state.messages.append({"role": "user", "content": prompt})
+            st.session_state.processing = True
             st.rerun()
 
 def render_list_view(title, list_obj):
