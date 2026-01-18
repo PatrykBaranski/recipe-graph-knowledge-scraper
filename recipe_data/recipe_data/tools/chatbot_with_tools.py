@@ -4,10 +4,18 @@ from langchain_core.messages import HumanMessage, AIMessage
 from recipe_data.recipe_data.tools.common import llm
 from recipe_data.recipe_data.tools.prompts import prompt
 from recipe_data.recipe_data.tools.fridge_tools import read_fridge, add_ingredient_to_fridge, remove_ingredient_from_fridge
-from recipe_data.recipe_data.tools.shopping_list_tools import add_ingredient_to_shopping_list, add_missing_ingredients_for_recipe, create_shopping_list_file_for_recipe
+from recipe_data.recipe_data.tools.shopping_list_tools import read_shopping_list, add_ingredient_to_shopping_list, add_missing_ingredients_for_recipe, create_shopping_list_file_for_recipe
 from recipe_data.recipe_data.tools.rag_tools import get_graph_rag_tool, get_vector_rag_tool
 
-base_tools = [read_fridge, add_ingredient_to_fridge, remove_ingredient_from_fridge, add_ingredient_to_shopping_list, add_missing_ingredients_for_recipe, create_shopping_list_file_for_recipe]
+base_tools = [
+    read_fridge, 
+    add_ingredient_to_fridge, 
+    remove_ingredient_from_fridge, 
+    read_shopping_list,
+    add_ingredient_to_shopping_list, 
+    add_missing_ingredients_for_recipe, 
+    create_shopping_list_file_for_recipe
+]
 
 class FridgeChatbot:
     def __init__(self, tools=None):

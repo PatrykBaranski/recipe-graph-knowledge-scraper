@@ -29,7 +29,12 @@ def get_graph_rag_tool():
         return Tool(
             name="GraphRAG",
             func=chain.run,
-            description="Użyj tego narzędzia, aby wyszukać przepisy w bazie danych grafowych Neo4j. Zadawaj pytania w języku naturalnym."
+            description="""OBOWIĄZKOWE narzędzie do wyszukiwania przepisów! Użyj ZAWSZE gdy użytkownik pyta o:
+- przepisy na śniadanie/obiad/kolację
+- co ugotować ze składników
+- dania z określonymi składnikami
+- przepisy na konkretne okazje
+Przekaż pytanie w języku naturalnym, np. 'przepisy na śniadanie z jajkami i mlekiem' lub 'przepisy z kurczakiem'."""
         )
     except Exception as e:
         print(f"Failed to initialize GraphRAG: {e}")
@@ -62,5 +67,9 @@ def get_vector_rag_tool():
     return Tool(
         name="VectorRAG",
         func=search,
-        description="Użyj tego narzędzia, aby wyszukać przepisy używając wyszukiwania wektorowego (podobieństwo tekstu)."
+        description="""OBOWIĄZKOWE narzędzie do wyszukiwania przepisów! Użyj ZAWSZE gdy użytkownik pyta o:
+- przepisy na śniadanie/obiad/kolację
+- co ugotować ze składników
+- dania z określonymi składnikami
+Przekaż pytanie w języku naturalnym, np. 'przepisy na śniadanie' lub 'dania z kurczakiem'."""
     )
