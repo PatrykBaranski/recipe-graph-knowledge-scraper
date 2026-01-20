@@ -1,3 +1,5 @@
+langchain-core
+langchain-openai
 async_timeout==5.0.1
 BeautifulSoup4==4.14.3
 blobfile==3.1.0
